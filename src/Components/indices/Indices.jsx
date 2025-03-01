@@ -8,16 +8,22 @@ const indices = {
     { symbol: "MSFT", name: "DAX" },
     { symbol: "QQQ", name: "IBEX 35" },
     { symbol: "IBM", name: "Euro Stoxx" },
+    { symbol: "TSLA", name: "CAC 40" },
+    { symbol: "SAN", name: "FTSE 100" },
   ],
   us: [
     { symbol: "MTS", name: "S&P 500" },
     { symbol: "BKT", name: "NASDAQ" },
     { symbol: "IAG", name: "Dow Jones" },
+    { symbol: "TEF", name: "VIC" },
+    { symbol: "V", name: "IR 2000" },
   ],
   asia: [
     { symbol: "FAE", name: "Nikkei 225" },
     { symbol: "FDR", name: "Hang Seng" },
     { symbol: "NVDA", name: "Shanghai C" },
+    { symbol: "UNI", name: "SSE C" },
+    { symbol: "BAC", name: "BSE" },
   ],
 };
 
@@ -93,15 +99,15 @@ const Indices = () => {
               <div className="w-8">
                 {index.change > 0 ? (
                   <svg className="w-6 h-6 text-success" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 10l7-7m0 0l7 7m-7-7v18" />
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={4} d="M5 10l7-7m0 0l7 7m-7-7v18" />
                   </svg>
                 ) : index.change < 0 ? (
                   <svg className="w-6 h-6 text-error" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={4} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
                   </svg>
                 ) : (
                   <svg className="w-6 h-6 text-neutral" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M20 12H4" />
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={4} d="M20 12H4" />
                   </svg>
                 )}
               </div>

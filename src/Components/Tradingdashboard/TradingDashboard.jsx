@@ -2,6 +2,10 @@
 //5 Columnas x 3 Filas
 
 import Indices from '../indices/Indices';
+import StockIndicesDashboard  from '../grafico/StockIndicesDashboard';
+import FinancialNews  from '../noticias/FinancialNews';
+
+import Animacion from './Animacion';
 import { Link } from 'react-router-dom';
 
 const TradingDashboard = () => {
@@ -14,28 +18,22 @@ const TradingDashboard = () => {
       <main className="container mx-auto px-4 py-8">
         {/* Primera fila de cajas */}
         <div className="grid grid-cols-1 md:grid-cols-5 gap-4 mb-4">
-        <div className="p-4 rounded-lg shadow-lg flex flex-col md:col-span-1 col-span-1 w-full h-64 overflow-hidden" style={{ backgroundColor: '#a8ba86' }}>
+        <div className="p-4 rounded-lg shadow-lg flex flex-col md:col-span-1 col-span-1 w-full h-[500px] overflow-hidden" style={{ backgroundColor: '#a8ba86' }}>
             <Indices />
           </div>
-          <div className="bg-blue-500 p-8 rounded-lg shadow-lg flex items-center justify-center col-span-1 md:col-span-2" style={{ backgroundColor: '#a8ba86' }}>
-            <span className="text-white text-lg font-bold">Caja 2 y 3</span>
+          <div className="bg-blue-500 p-8 rounded-lg shadow-lg flex items-center justify-center col-span-1 md:col-span-2 h-[500px]  " style={{ backgroundColor: '#fafafa' }}>
+            <StockIndicesDashboard />
           </div>
-          <div className="bg-yellow-500 p-8 rounded-lg shadow-lg flex items-center justify-center col-span-1" style={{ backgroundColor: '#a8ba86' }}>
-            <span className="text-white text-lg font-bold">Caja 4</span>
-          </div>
-          <div className="bg-green-500 p-8 rounded-lg shadow-lg flex items-center justify-center col-span-1" style={{ backgroundColor: '#a8ba86' }}>
-            <span className="text-white text-lg font-bold">Caja 5</span>
+          <div className="bg-blue-500 p-8 rounded-lg shadow-lg flex items-center justify-center col-span-1 md:col-span-2 h-[500px]  " style={{ backgroundColor: '#a8ba86' }}>
+            <FinancialNews />
           </div>
         </div>
 
         {/* Segunda fila de cajas */}
         <div className="grid grid-cols-1 md:grid-cols-5 gap-4 mb-4">
-          <div className="bg-purple-500 p-8 rounded-lg shadow-lg flex items-center justify-center col-span-1" style={{ backgroundColor: '#a8ba86' }}>
-         
-          <Link to="/portfolios/:userId">
-             <button className="bg-[#46695a] text-white">Ver las Carteras</button>
-          </Link>
-
+          <div className="bg-purple-500 p-8 rounded-lg shadow-lg flex items-center justify-center col-span-1 h-[255px]" style={{ backgroundColor: '#213435' }}>
+ 
+           <Animacion />
            </div>
           <div className="bg-pink-500 p-8 rounded-lg shadow-lg flex items-center justify-center col-span-1" style={{ backgroundColor: '#a8ba86' }}>
             <span className="text-white text-lg font-bold">Caja 7</span>
