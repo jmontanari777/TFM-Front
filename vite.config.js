@@ -16,5 +16,13 @@ export default defineConfig({
   css: {
     postcss: './postcss.config.js',
   },
+  server: {
+    proxy: {
+      "/socket.io": {
+        target: "http://localhost:3000",
+        ws: true, // Habilita WebSocket proxying
+      },
+    },
+  },
 })
 

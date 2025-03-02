@@ -241,7 +241,7 @@ const SearchModal = ({ isOpen, onClose, selectedPortfolio, portfolioId, onStockU
                             handleQuantityChange(e.target.value);
                           }}
                           onClick={(e) => e.stopPropagation()}
-                          className="w-16 text-center border border-gray-300 rounded-lg"
+                          className="w-16 text-center border border-gray-300 rounded-lg bg-white text-black"
                           min="1"
                         />
                         <button

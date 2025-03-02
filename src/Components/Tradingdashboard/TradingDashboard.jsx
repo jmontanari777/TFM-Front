@@ -4,6 +4,8 @@
 import Indices from '../indices/Indices';
 import StockIndicesDashboard  from '../grafico/StockIndicesDashboard';
 import FinancialNews  from '../noticias/FinancialNews';
+import InsertNews  from '../noticias/InsertNews';
+import Noticias  from '../noticias/noticias';
 
 import Animacion from './Animacion';
 import { Link } from 'react-router-dom';
@@ -25,7 +27,7 @@ const TradingDashboard = () => {
             <StockIndicesDashboard />
           </div>
           <div className="bg-blue-500 p-8 rounded-lg shadow-lg flex items-center justify-center col-span-1 md:col-span-2 h-[500px]  " style={{ backgroundColor: '#a8ba86' }}>
-            <FinancialNews />
+            <Noticias />
           </div>
         </div>
 
@@ -42,10 +44,18 @@ const TradingDashboard = () => {
             <span className="text-white text-lg font-bold">Caja 8</span>
           </div>
           <div className="bg-teal-500 p-8 rounded-lg shadow-lg flex items-center justify-center col-span-1" style={{ backgroundColor: '#a8ba86' }}>
-            <span className="text-white text-lg font-bold">Caja 9</span>
+             
+
+  <FinancialNews />
+
+            
           </div>
-          <div className="bg-orange-500 p-8 rounded-lg shadow-lg flex items-center justify-center col-span-1" style={{ backgroundColor: '#a8ba86' }}>
-            <span className="text-white text-lg font-bold">Caja 10</span>
+          <div className="relative p-8 rounded-lg shadow-lg col-span-1" style={{ backgroundColor: '#a8ba86' }}>
+  
+                   {/** Caja 10, donde van las noticias que se insertan en la base de datos y se usa websockets*/}
+                 <InsertNews />
+               
+                 
           </div>
         </div>
 
