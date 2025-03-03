@@ -5,7 +5,7 @@ import Indices from '../indices/Indices';
 import StockIndicesDashboard  from '../grafico/StockIndicesDashboard';
 import FinancialNews  from '../noticias/FinancialNews';
 import InsertNews  from '../noticias/InsertNews';
-import Noticias  from '../noticias/noticias';
+import Noticias  from '../noticias/Noticias';
 
 import Animacion from './Animacion';
 import { Link } from 'react-router-dom';
