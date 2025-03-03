@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import Logo from '@/components/atoms/Logo.jsx'
+import Logo from '@/Components/atoms/Logo.jsx'
 import NavLinks from '@/components/molecules/NavLinks'
 
 const Navbar = () => {
