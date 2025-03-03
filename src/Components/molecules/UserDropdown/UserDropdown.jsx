@@ -1,7 +1,7 @@
 import { useState, useRef, useEffect } from 'react'
 import { User, CreditCard, ChartCandlestick, LogOut } from 'lucide-react'
 import useAuth from '@/context/AuthContext/useAuth'
-import Button from '@/components/atoms/Button'
+import Button from '@/Components/atoms/Button'
 
 const UserDropdown = () => {
   const { user, logout } = useAuth() // Accedemos a la info del usuario y función de logout
