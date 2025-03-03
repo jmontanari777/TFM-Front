@@ -1,5 +1,5 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
-import Navbar from "./components/organisms/Navbar/Navbar.jsx";
+import Navbar from "./Components/organisms/Navbar/Navbar.jsx";
 import TradingDashboard from "./Components/Tradingdashboard/TradingDashboard"
 import PortfolioList from "./Components/portfolio/PortfolioList"
 import "./App.css"; 
