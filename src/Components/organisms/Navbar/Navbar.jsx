@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import Logo from '@/Components/atoms/Logo.jsx'
-import NavLinks from '@/components/molecules/NavLinks'
+import NavLinks from '@/Components/molecules/NavLinks'
 
 const Navbar = () => {
   const [isMobileOpen, setIsMobileOpen] = useState(false)
