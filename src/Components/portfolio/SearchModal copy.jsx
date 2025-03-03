@@ -183,7 +183,7 @@ const SearchModal = ({ isOpen, onClose, selectedPortfolio, portfolioId, onStockU
             <input
               type="text"
               placeholder="Buscar por nombre o símbolo"
-              className="w-full p-2 border border-gray-300 rounded-lg bg-white text-gray-800"
+              className="w-full p-2 border border-gray-300 rounded-lg"
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
             />
@@ -241,7 +241,7 @@ const SearchModal = ({ isOpen, onClose, selectedPortfolio, portfolioId, onStockU
                             handleQuantityChange(e.target.value);
                           }}
                           onClick={(e) => e.stopPropagation()}
-                          className="w-16 text-center border border-gray-300 rounded-lg bg-white text-gray-800"
+                          className="w-16 text-center border border-gray-300 rounded-lg"
                           min="1"
                         />
                         <button
@@ -282,7 +282,8 @@ const SearchModal = ({ isOpen, onClose, selectedPortfolio, portfolioId, onStockU
             <button
               onClick={handleAddToPortfolio}
               disabled={isLoading || !selectedStock}
-              className="px-4 py-2 bg-[#46695a] text-white rounded-lg hover:bg-[#223536] disabled:opacity-50 disabled:bg-[#46695a]"
+              className="px-4 py-2 bg-custom-green text-white rounded-lg hover:bg-custom-dark disabled:bg-custom-green-light"
+             
             >
               {isLoading ? 'Agregando...' : 'Agregar a cartera'}
             </button>
