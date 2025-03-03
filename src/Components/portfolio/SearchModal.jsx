@@ -241,7 +241,7 @@ const SearchModal = ({ isOpen, onClose, selectedPortfolio, portfolioId, onStockU
                             handleQuantityChange(e.target.value);
                           }}
                           onClick={(e) => e.stopPropagation()}
-                          className="w-16 text-center border border-gray-300 rounded-lg bg-white text-black"
+                          className="w-16 text-center border border-gray-300 rounded-lg"
                           min="1"
                         />
                         <button
@@ -282,7 +282,8 @@ const SearchModal = ({ isOpen, onClose, selectedPortfolio, portfolioId, onStockU
             <button
               onClick={handleAddToPortfolio}
               disabled={isLoading || !selectedStock}
-              className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 disabled:bg-blue-300"
+              className="px-4 py-2 bg-custom-green text-white rounded-lg hover:bg-custom-dark disabled:bg-custom-green-light"
+             
             >
               {isLoading ? 'Agregando...' : 'Agregar a cartera'}
             </button>

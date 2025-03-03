@@ -55,7 +55,7 @@ export default function InsertNews() {
                 insertNews({
                     titulo: "Amazon lanza su primer coche eléctrico",
                     descripcion: "El nuevo vehículo competirá con Tesla en el mercado de EVs.",
-                    tickers: ["TSM"],
+                    tickers: ["AMZN"],
                     fuente: "Bloomberg",
                     importancia: "media",
                     url: "https://www.bloomberg.com/amazon-car",
@@ -68,15 +68,15 @@ export default function InsertNews() {
              style={{ backgroundColor: '#223536', color: '#e1e3ac' }} 
              onClick={() => 
                 insertNews({
-                    titulo: "Meta introduce realidad aumentada en Facebook",
-                    descripcion: "Facebook ahora incluirá funciones avanzadas de AR.",
+                    titulo: "Intel amplía la línea Xeon 6 con CPUs de núcleos de alto rendimiento",
+                    descripcion: "Intel Corporation (NASDAQ:INTC), un actor destacado en la industria de semiconductores con una capitalización de mercado de 104.000 millones de dólares y unos ingresos anuales de 53.100 millones de dólares, ha ampliado su familia de procesadores Xeon 6, introduciendo nuevas CPUs con núcleos de alto rendimiento",
                     tickers: ["INTC"],
-                    fuente: "TechCrunch",
+                    fuente: "Investing",
                     importancia: "baja",
-                    url: "https://www.techcrunch.com/meta-ar",
+                    url: "https://es.investing.com/news/company-news/intel-amplia-la-linea-xeon-6-con-cpus-de-nucleos-de-alto-rendimiento-93CH-3028337",
                   })
              }>Noticia 4</button>
-             <p>Meta</p>
+             <p>Intel</p>
           </div>
         
     </div>  

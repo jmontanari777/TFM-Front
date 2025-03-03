@@ -12,6 +12,9 @@ export default {
   			'primary-light': '#e1e3ac',
   			'hover-state': '#648a64',
   			'error-color': '#c44536',
+			'custom-green': '#46695a',
+			'custom-dark': '#223536',
+			'custom-green-light' : '#a8ba86',
   			background: 'hsl(var(--background))',
   			foreground: 'hsl(var(--foreground))',
   			card: {
