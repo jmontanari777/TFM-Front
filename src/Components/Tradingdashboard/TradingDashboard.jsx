@@ -8,8 +8,6 @@ import InsertNews  from '../noticias/InsertNews';
 import Noticias  from '../noticias/Noticias';
 
 import Animacion from './Animacion';
-import { Link } from 'react-router-dom';
-
 const TradingDashboard = () => {
 
 
