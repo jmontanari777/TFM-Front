@@ -228,8 +228,7 @@ const StockIndicesDashboard = () => {
               ) : (
                 <ArrowDown size={16} className="mr-1" />
               )}
-              {isPositive ? '+' : ''}{percentChange}% {formatNumber(Math.abs(change))} Hoy
-            </span>
+              {isPositive ? '+' : ''}{percentChange}% {formatNumber(Math.abs(change))}             </span>
           </div>
           <div className="text-sm text-gray-500">{getCurrentDate()}</div>
         </CardHeader>
