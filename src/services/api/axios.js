@@ -12,7 +12,9 @@ require('dotenv').config()
  * - headers: Define el tipo de contenido por defecto para las solicitudes
  */
 // Determina la URL base, si no lee del puerto, del backend en la nube
-const baseURL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3000'
+//const baseURL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3000'
+const baseURL =  'http://localhost:3000'
+
 
 const api = axios.create({
   baseURL, // URL base del backend (desde variable)
