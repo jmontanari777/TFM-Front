@@ -13,8 +13,8 @@ import axios from 'axios'
  */
 // Determina la URL base, si no lee del puerto, del backend en la nube
 //const baseURL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3000'
-//const baseURL =  'http://localhost:3000' || 'https://tfm-frontend-k47v.vercel.app/'
-const baseURL = 'https://tfm-frontend-k47v.vercel.app/'
+//const baseURL =  'http://localhost:3000' || 'https://tfm-backend-rq2s.onrender.com'
+const baseURL = 'https://tfm-backend-rq2s.onrender.com'
 
 
 const api = axios.create({
