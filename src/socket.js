@@ -1,6 +1,6 @@
 import { io } from "socket.io-client";
 
-const SOCKET_SERVER_URL = "http://localhost:3000";
+const SOCKET_SERVER_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3000'
 
 export const socket = io(SOCKET_SERVER_URL, {
   transports: ["websocket"],

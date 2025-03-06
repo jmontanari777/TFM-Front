@@ -1,4 +1,5 @@
 import axios from 'axios'
+require('dotenv').config()
 
 // ===================================================
 // Configuración inicial de la instancia de Axios
@@ -10,8 +11,11 @@ import axios from 'axios'
  * - timeout: Establece un límite de tiempo para las solicitudes (en milisegundos)
  * - headers: Define el tipo de contenido por defecto para las solicitudes
  */
+// Determina la URL base, si no lee del puerto, del backend en la nube
+const baseURL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3000'
+
 const api = axios.create({
-  baseURL: 'http://localhost:3000', // URL base del backend
+  baseURL, // URL base del backend (desde variable)
   withCredentials: true, // Envía cookies automáticamente en cada solicitud (para JWT)
   timeout: 10000, // Tiempo máximo de espera para las solicitudes (10 segundos)
   headers: {
