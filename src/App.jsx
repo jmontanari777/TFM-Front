@@ -3,7 +3,7 @@ import Navbar from "./Components/organisms/Navbar/Navbar"
 import TradingDashboard from "./Components/Tradingdashboard/TradingDashboard"
 import PortfolioList from "./Components/portfolio/PortfolioList"
 import "./App.css"; 
-
+ 
 const App = () => (
   <BrowserRouter>
    <Navbar />
