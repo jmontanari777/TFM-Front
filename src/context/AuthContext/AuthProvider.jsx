@@ -24,23 +24,31 @@ const AuthProvider = ({ children }) => {
    */
   useEffect(() => {
     const validateToken = async () => {
-      try {
-        const response = await api.get('/auth/validate-token', {
-          withCredentials: true, // Asegura el envío de cookies para validar el token
-        })
-
-        setUser(response.data) // Establece la información del usuario si el token es válido
-        setIsLoggedIn(true) // Cambia el estado de autenticación a verdadero
-      } catch (error) {
-        console.error('Token inválido o expirado:', error)
-        setIsLoggedIn(false) // Cambia el estado de autenticación a falso si el token no es válido
-      } finally {
-        setChecking(false) // Finaliza el estado de verificación
+      // Verifica si hay cookies antes de hacer la solicitud
+      if (!document.cookie.includes("token")) {
+        console.warn("No hay token en las cookies, usuario no autenticado");
+        setChecking(false);
+        return;
       }
-    }
-
-    validateToken() // Llama a la función para validar el token al cargar la aplicación
-  }, [])
+  
+      try {
+        const response = await api.get("/auth/validate-token", {
+          withCredentials: true,
+        });
+  
+        setUser(response.data);
+        setIsLoggedIn(true);
+      } catch (error) {
+        console.error("Token inválido o expirado:", error);
+        setIsLoggedIn(false);
+      } finally {
+        setChecking(false);
+      }
+    };
+  
+    validateToken();
+  }, []);
+  
 
   // ================================
   // Función de Inicio de Sesión (Login)

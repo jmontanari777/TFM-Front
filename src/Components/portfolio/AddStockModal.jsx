@@ -1,6 +1,22 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 
+// Configurar axios para incluir el token en todas las peticiones
+const setupAuthInterceptor = () => {
+  axios.interceptors.request.use(
+    (config) => {
+      const token = localStorage.getItem('token');
+      if (token) {
+        config.headers.Authorization = `Bearer ${token}`;
+      }
+      return config;
+    },
+    (error) => {
+      return Promise.reject(error);
+    }
+  );
+};
+
 export default function AddStockModal({ isOpen, onClose, onAddStock }) {
   const [searchTerm, setSearchTerm] = useState("");
   const [stocks, setStocks] = useState([]);
@@ -8,6 +24,12 @@ export default function AddStockModal({ isOpen, onClose, onAddStock }) {
   const [investmentType, setInvestmentType] = useState("shares"); // "shares" o "money"
   const [investmentValue, setInvestmentValue] = useState("");
   const [price, setPrice] = useState(null);
+  const [error, setError] = useState(null);
+
+  // Configurar el interceptor de autenticación cuando se monta el componente
+  useEffect(() => {
+    setupAuthInterceptor();
+  }, []);
 
   useEffect(() => {
     if (searchTerm.length > 1) {
@@ -22,8 +44,16 @@ export default function AddStockModal({ isOpen, onClose, onAddStock }) {
     try {
       const response = await axios.get(`/api/stocks?search=${searchTerm}`);
       setStocks(response.data);
+      setError(null);
     } catch (error) {
       console.error("Error al buscar acciones:", error);
+      if (error.response && error.response.status === 401) {
+        setError("Sesión expirada. Por favor, vuelve a iniciar sesión.");
+        // Opcional: redirigir al usuario a la página de login
+        // window.location.href = '/login';
+      } else {
+        setError("Error al buscar acciones. Inténtalo de nuevo.");
+      }
     }
   };
 
@@ -32,8 +62,14 @@ export default function AddStockModal({ isOpen, onClose, onAddStock }) {
     try {
       const response = await axios.get(`/api/stocks/price?ticker=${ticker}`);
       setPrice(response.data.price);
+      setError(null);
     } catch (error) {
       console.error("Error al obtener la cotización:", error);
+      if (error.response && error.response.status === 401) {
+        setError("Sesión expirada. Por favor, vuelve a iniciar sesión.");
+      } else {
+        setError("Error al obtener la cotización. Inténtalo de nuevo.");
+      }
     }
   };
 
@@ -67,8 +103,14 @@ export default function AddStockModal({ isOpen, onClose, onAddStock }) {
       await axios.post("/api/portfolio/add", investmentData);
       onAddStock(investmentData);
       onClose();
+      setError(null);
     } catch (error) {
       console.error("Error al guardar la inversión:", error);
+      if (error.response && error.response.status === 401) {
+        setError("Sesión expirada. Por favor, vuelve a iniciar sesión.");
+      } else {
+        setError("Error al guardar la inversión. Inténtalo de nuevo.");
+      }
     }
   };
 
@@ -78,6 +120,13 @@ export default function AddStockModal({ isOpen, onClose, onAddStock }) {
     <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
       <div className="bg-white p-6 rounded-lg shadow-lg w-96">
         <h2 className="text-xl font-bold mb-4">Añadir Valor</h2>
+        
+        {/* Mostrar mensajes de error */}
+        {error && (
+          <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-2 rounded mb-4">
+            {error}
+          </div>
+        )}
 
         {/* 🔎 Búsqueda de acción */}
         <input
