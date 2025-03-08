@@ -15,7 +15,11 @@ import axios from 'axios'
 //const baseURL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3000'
 //const baseURL =  'http://localhost:3000' || 'https://tfm-backend-rq2s.onrender.com'
 //const baseURL = 'https://tfm-backend-rq2s.onrender.com'
-const baseURL =  'http://localhost:3000'
+
+
+//const baseURL =  'http://localhost:3000'
+const baseURL =  'https://tfm-backend-kalx.onrender.com/'
+
 
 const api = axios.create({
   baseURL, // URL base del backend (desde variable)
