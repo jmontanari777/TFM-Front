@@ -16,7 +16,7 @@ const App = () => (
         element={
           <div className="text-center mt-10 text-lg font-medium">
             Página no encontrada
-          </div>
+          </div>  
         }
       />
     </Routes>
