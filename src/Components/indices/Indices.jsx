@@ -3,6 +3,13 @@ import axios from "axios";
 
 const API_KEY = "cuhqno9r01qk32qa2ce0cuhqno9r01qk32qa2ceg";
 
+// Configurar el token de autenticación para todas las solicitudes de axios
+// Asumiendo que guardas tu token de autenticación en localStorage después de iniciar sesión
+const token = localStorage.getItem('token');
+if (token) {
+  axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+}
+
 const indices = {
   europe: [
     { symbol: "MSFT", name: "DAX" },
@@ -35,9 +42,16 @@ const Indices = () => {
     try {
       const responses = await Promise.all(
         indices[region].map((index) =>
-         // axios.get(`https://finnhub.io/api/v1/quote?symbol=${index.symbol}&token=${API_KEY}`)
-        axios.get(`https://tfm-backend-kalx.onrender.com/api/finnhub/quote?symbol=${index.symbol}&token=${API_KEY}`)
-
+          // Incluir el token en cada solicitud específica por si la configuración global falla
+          axios.get(`https://tfm-backend-kalx.onrender.com/api/finnhub/quote`, {
+            params: {
+              symbol: index.symbol,
+              token: API_KEY
+            },
+            headers: {
+              'Authorization': `Bearer ${localStorage.getItem('token')}`
+            }
+          })
         )
       );
 
@@ -48,6 +62,7 @@ const Indices = () => {
         percentChange: response.data?.dp ?? 0,
       }));
     } catch (err) {
+      console.error("Error fetching region indices:", err);
       return [];
     }
   };
@@ -55,28 +70,27 @@ const Indices = () => {
   useEffect(() => {
     const fetchAllData = async () => {
       try {
-        const [europeData, usData, asiaData] = await Promise.all([  //Aqui se almacenan los indices
+        const [europeData, usData, asiaData] = await Promise.all([
           fetchRegionIndices("europe"),
           fetchRegionIndices("us"),
           fetchRegionIndices("asia"),
         ]);
         setIndexData({ europe: europeData, us: usData, asia: asiaData });
       } catch (err) {
-        console.error("Error fetching data:", err);
+        console.error("Error fetching all data:", err);
       }
     };
 
     fetchAllData();
-    // Aqui se setea la frecuencia de lectura de los indices en la API 
-    const interval = setInterval(fetchAllData, 100000); //Uso normalmente 100000 para retrasar el limite 
-    return () => clearInterval(interval);  //de peticiones de la API  de Finnhub
+    const interval = setInterval(fetchAllData, 100000);
+    return () => clearInterval(interval);
   }, []);
 
   return (
     <div className="h-full flex flex-col">
       <div className="flex justify-center space-x-2 mb-2">
         {["europe", "us", "asia"].map((region) => (
-          <button   // Aqui estan los botones para seleccionar las regiones a visualizar
+          <button
             key={region}
             onClick={() => setActiveRegion(region)}
             className={`btn btn-xs text-black border-none ${
@@ -90,13 +104,13 @@ const Indices = () => {
         ))}
       </div>
          
-      <div className="flex-1 overflow-auto">  {/* Aqui se grafican las cajas de los indices */}
+      <div className="flex-1 overflow-auto">
         <div className="flex flex-col space-y-2">
           {indexData[activeRegion]?.map((index, i) => (
             <div 
               key={i} 
               className="rounded-lg shadow-sm p-2 flex items-center justify-between h-14"
-              style={{ backgroundColor: "##638a63" }} //Color de las cajas en donde se grafican los indices
+              style={{ backgroundColor: "##638a63" }}
             >
               <div className="w-8">
                 {index.change > 0 ? (
