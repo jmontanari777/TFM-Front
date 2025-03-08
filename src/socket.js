@@ -1,8 +1,11 @@
+//En este componente se implementa la tecnologia de websockets
+//Cuando hay un evento en el backend, este envia un mensaje al front
+//En este proyecto, cuando se guarda una noticia en la BD, que esta relacionada
+//con alguna accion que el usuario tiene en el portfolio
+//el backend envia esta noticia al Front
+
+
 import { io } from "socket.io-client";
-
-
-//const SOCKET_SERVER_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3000'
-//const SOCKET_SERVER_URL = 'https://tfm-frontend-k47v.vercel.app/'
 const SOCKET_SERVER_URL = 'https://tfm-backend-kalx.onrender.com/'
 
 export const socket = io(SOCKET_SERVER_URL, {
