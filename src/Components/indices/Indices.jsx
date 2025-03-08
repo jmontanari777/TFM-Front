@@ -35,7 +35,9 @@ const Indices = () => {
     try {
       const responses = await Promise.all(
         indices[region].map((index) =>
-          axios.get(`https://finnhub.io/api/v1/quote?symbol=${index.symbol}&token=${API_KEY}`)
+         // axios.get(`https://finnhub.io/api/v1/quote?symbol=${index.symbol}&token=${API_KEY}`)
+        axios.get(`https://tfm-backend-kalx.onrender.com/api/v1/quote?symbol=${index.symbol}&token=${API_KEY}`)
+
         )
       );
 
