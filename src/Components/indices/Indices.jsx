@@ -43,7 +43,7 @@ const Indices = () => {
       const responses = await Promise.all(
         indices[region].map((index) =>
           // Incluir el token en cada solicitud específica por si la configuración global falla
-          axios.get(`https://tfm-backend-kalx.onrender.com/api/finnhub/quote`, {
+          axios.get(`https://tfm-backend-kalx.onrender.com/api/quote`, {
             params: {
               symbol: index.symbol,
               token: API_KEY
