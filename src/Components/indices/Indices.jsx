@@ -40,20 +40,21 @@ const Indices = () => {
 
   const fetchRegionIndices = async (region) => {
     try {
-      const responses = await Promise.all(
-        indices[region].map((index) =>
-          // Incluir el token en cada solicitud específica por si la configuración global falla
-          axios.get(`https://tfm-backend-kalx.onrender.com/api/quote`, {
-            params: {
-              symbol: index.symbol,
-              token: API_KEY
-            },
-            headers: {
-              'Authorization': `Bearer ${localStorage.getItem('token')}`
-            }
-          })
-        )
-      );
+   // Verifica que indices[region] sea un array válido
+   if (!indices[region] || !Array.isArray(indices[region])) {
+    throw new Error(`No se encontraron índices para la región: ${region}`);
+  }
+
+  const responses = await Promise.all(
+    indices[region].map((index) =>
+      axios.get(`https://tfm-backend-kalx.onrender.com/api/quote`, {
+        params: {
+          symbol: index.symbol, // Solo envía el símbolo
+        },
+
+      })
+    )
+  );
 
       return responses.map((response, i) => ({
         name: indices[region][i].name,
