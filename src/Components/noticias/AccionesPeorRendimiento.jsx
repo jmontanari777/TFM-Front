@@ -23,11 +23,11 @@ const AccionesPeorRendimiento = () => {
   }, []);
 
   return (
-    <div className="bg-[#fafafa] rounded-xl shadow-lg p-4 border border-[#e1e3ac]">
+    <div className="bg-[#fafafa] rounded-xl shadow-lg p-4 border border-[#e1e3ac] min-h-[320px]">  {/* Aumenta la altura mínima */}
       <div className="flex items-center justify-between mb-4">
         <div className="flex items-center">
           <div className="bg-[#e1e3ac] p-1.5 rounded-lg mr-2">
-            <TrendingDown size={18} className="text-[#223536]" />
+            <TrendingDown size={18} className="text-[#d60225]" />
           </div>
           <h2 className="text-lg font-bold text-[#223536]">Acciones en baja</h2>
         </div>
