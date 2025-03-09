@@ -74,8 +74,15 @@ const AuthProvider = ({ children }) => {
       await api.post('/auth/sign-out', {}, { withCredentials: true }) // Solicitud para limpiar la cookie del servidor
       setUser(null) // Limpia la información del usuario en el estado
       setIsLoggedIn(false) // Cambia el estado de autenticación a falso
-      window.location.href = '/login'; //recarga la pagina
-      localStorage.removeItem('user');  //Borro el userId
+      window.location.href = '/'; //recarga la pagina
+      // Borrar el token
+      localStorage.removeItem('token');
+
+     // Borrar el userId
+     localStorage.removeItem('userId');
+      
+
+
       console.log('entra en signountt')
     } catch (error) {
       console.error('Error al cerrar sesión:', error)
