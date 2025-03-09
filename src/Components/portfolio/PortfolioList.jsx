@@ -282,18 +282,19 @@ const PortfolioList = () => {
                 Crear Nueva Cartera
               </h3>
               <input
-                type="text"
-                value={newPortfolioName}
-                onChange={(e) => setNewPortfolioName(e.target.value)}
-                placeholder="Nombre de la cartera"
-                style={{
-                  width: "100%",
-                  padding: "0.5rem",
-                  marginBottom: "1rem",
-                  border: `1px solid ${customColors.white}`,
-                  borderRadius: "0.375rem"
-                }}
-              />
+  type="text"
+  value={newPortfolioName}
+  onChange={(e) => setNewPortfolioName(e.target.value)}
+  placeholder="Nombre de la cartera"
+  style={{
+    width: "100%",
+    padding: "0.5rem",
+    marginBottom: "1rem",
+    border: `1px solid ${customColors.border}`, // Change from customColors.white to customColors.border
+    borderRadius: "0.375rem",
+    backgroundColor: customColors.white // Add this line to explicitly set the background color
+  }}
+/>
               <div style={{ display: "flex", gap: "1rem", justifyContent: "flex-end" }}>
                 <button
                   onClick={() => setIsAddPortfolioModalOpen(false)}
