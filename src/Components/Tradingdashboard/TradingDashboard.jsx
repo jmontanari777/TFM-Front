@@ -1,5 +1,6 @@
 //En este componente, se grafica el modelo de cajas en la landing Page
 //5 Columnas x 3 Filas
+//
 
 import Indices from '../indices/Indices';
 import StockIndicesDashboard  from '../grafico/StockIndicesDashboard';
@@ -8,6 +9,7 @@ import InsertNews  from '../noticias/InsertNews';
 import Noticias  from '../noticias/Noticias';
 
 import Animacion from './Animacion';
+
 const TradingDashboard = () => {
 
 
@@ -21,7 +23,7 @@ const TradingDashboard = () => {
         <div className="p-4 rounded-lg shadow-lg flex flex-col md:col-span-1 col-span-1 w-full h-[500px] overflow-hidden" style={{ backgroundColor: '#a8ba86' }}>
             <Indices />
           </div>
-          <div className="bg-blue-500 p-8 rounded-lg shadow-lg flex items-center justify-center col-span-1 md:col-span-2 h-[500px]  " style={{ backgroundColor: '#fafafa' }}>
+          <div className="bg-blue-500 p-8 rounded-lg shadow-lg flex items-center justify-center col-span-1 md:col-span-2 h-[480px]  " style={{ backgroundColor: '#fafafa' }}>
             <StockIndicesDashboard />
           </div>
           <div className="bg-blue-500 p-8 rounded-lg shadow-lg flex items-center justify-center col-span-1 md:col-span-2 h-[500px]  " style={{ backgroundColor: '#a8ba86' }}>

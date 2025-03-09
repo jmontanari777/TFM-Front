@@ -37,6 +37,7 @@ export default function Portfolio({ userId }) {
         } catch (error) {
           console.error(`Error al actualizar ${stock.ticker}:`, error);
           return stock;
+          console.log('');
         }
       })
     );
