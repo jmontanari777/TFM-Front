@@ -23,7 +23,7 @@ const AccionesPeorRendimiento = () => {
   }, []);
 
   return (
-    <div className="bg-[#fafafa] rounded-xl shadow-lg p-4 border border-[#e1e3ac] min-h-[320px]">  {/* Aumenta la altura mínima */}
+    <div className="bg-[#fafafa] rounded-xl shadow-lg p-4 border border-[#e1e3ac] min-h-[380px]">  {/* Aumenta la altura mínima */}
       <div className="flex items-center justify-between mb-4">
         <div className="flex items-center">
           <div className="bg-[#e1e3ac] p-1.5 rounded-lg mr-2">
