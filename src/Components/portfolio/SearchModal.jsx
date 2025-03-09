@@ -45,7 +45,7 @@ const SearchModal = ({ isOpen, onClose, selectedPortfolio, portfolioId, onStockU
     const fetchStocks = async () => {
       try {
         setLoadingStocks(true);
-        const response = await axios.get("http://localhost:3000/accions");
+        const response = await axios.get("http://tfm-backend-kalx.onrender.com/accions");
 
         if (Array.isArray(response.data.accions)) { // Verifica si la respuesta es un array
           setStocks(response.data.accions);
@@ -123,20 +123,20 @@ const SearchModal = ({ isOpen, onClose, selectedPortfolio, portfolioId, onStockU
 
       // Primero verificamos si la acción ya existe
       const checkResponse = await axios.get(
-        `http://localhost:3000/portfolios/${portfolioId}/stock/${selectedStock.ticker}`
+        `http://tfm-backend-kalx.onrender.com/portfolios/${portfolioId}/stock/${selectedStock.ticker}`
       );
 
       let response;
       if (checkResponse.data.exists) {
         // Si existe, actualizamos la cantidad
         response = await axios.put(
-          `http://localhost:3000/portfolios/${portfolioId}/stock/${selectedStock.ticker}`,
+          `http://tfm-backend-kalx.onrender.com/portfolios/${portfolioId}/stock/${selectedStock.ticker}`,
           stockData
         );
       } else {
         // Si no existe, la añadimos
         response = await axios.post(
-          `http://localhost:3000/portfolios/${portfolioId}/stock`,
+          `http://tfm-backend-kalx.onrender.com/portfolios/${portfolioId}/stock`,
           stockData
         );
       }
