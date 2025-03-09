@@ -3,32 +3,25 @@ import axios from "axios";
 
 export default function InsertNews() {
   const [status, setStatus] = useState("");
-  const useriD = localStorage.getItem('useriD'); // Obtén el userId desde el localStorage
+  const useriD = localStorage.getItem('useriD')
 
   const insertNews = async (newsData) => {
     try {
-      // Agrega el userId al objeto newsData
-      const dataToSend = {
-        ...newsData,
-        userId: useriD, // Envía el userId en el cuerpo de la solicitud
-      };
-
-      console.log("Enviando datos:", dataToSend);
-
+      console.log("Enviando datos:", newsData);
       const response = await axios.post(
-        "https://tfm-backend-kalx.onrender.com/noticias", // URL sin userId
-        dataToSend, // Envía el userId en el cuerpo
+        "https://tfm-backend-kalx.onrender.com/noticias?userId=${userId}", 
+        newsData,
         {
           headers: {
             'Content-Type': 'application/json',
+            'Authorization': `Bearer ${localStorage.getItem('useriD')}`
           },
           timeout: 15000, // 15 segundos para dar tiempo a Render
         }
       );
-
       setStatus(`✅ Noticia insertada: ${response.data.titulo}`);
     } catch (error) {
-      setStatus(`❌ Error: ${error.message || 'Hubo un problema al insertar la noticia'}`);
+      setStatus(`❌ Error: ${error.message || 'Desconocido'}`);
       
       if (error.response) {
         // El servidor respondió con un código de estado fuera del rango 2xx
