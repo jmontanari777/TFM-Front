@@ -37,11 +37,10 @@ const TradingDashboard = () => {
  
            <Animacion />
            </div>
-          <div className="bg-pink-500 p-8 rounded-lg shadow-lg flex items-center justify-center col-span-1" style={{ backgroundColor: '#a8ba86' }}>
-            <span className="text-white text-lg font-bold">Caja 7</span>
-          </div>
-          <div className="bg-indigo-500 p-8 rounded-lg shadow-lg flex items-center justify-center col-span-1" style={{ backgroundColor: '#a8ba86' }}>
-            <span className="text-white text-lg font-bold">Caja 8</span>
+           <div className="bg-blue-500 p-8 rounded-lg shadow-lg flex items-center justify-center col-span-1 md:col-span-2 h-[520px]  " style={{ backgroundColor: '#fafafa' }}>
+          
+           <span className="text-white text-lg font-bold">Cajas 7 y 8</span>
+          
           </div>
           <div className="bg-teal-500 p-8 rounded-lg shadow-lg flex items-center justify-center col-span-1" style={{ backgroundColor: '#a8ba86' }}>
              
