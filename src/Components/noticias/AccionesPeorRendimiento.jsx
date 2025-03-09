@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { TrendingUp } from 'lucide-react';
+import { TrendingDown } from 'lucide-react';
 
 const AccionesPeorRendimiento = () => {
   const [stocks, setStocks] = useState([]);
