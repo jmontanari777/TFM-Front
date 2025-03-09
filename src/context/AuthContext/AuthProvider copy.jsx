@@ -74,7 +74,6 @@ const AuthProvider = ({ children }) => {
       await api.post('/auth/sign-out', {}, { withCredentials: true }) // Solicitud para limpiar la cookie del servidor
       setUser(null) // Limpia la información del usuario en el estado
       setIsLoggedIn(false) // Cambia el estado de autenticación a falso
-      console.log('entra en signountt')
     } catch (error) {
       console.error('Error al cerrar sesión:', error)
     }
