@@ -290,7 +290,7 @@ const PortfolioList = () => {
                   width: "100%",
                   padding: "0.5rem",
                   marginBottom: "1rem",
-                  border: `1px solid ${customColors.border}`,
+                  border: `1px solid ${customColors.white}`,
                   borderRadius: "0.375rem"
                 }}
               />
