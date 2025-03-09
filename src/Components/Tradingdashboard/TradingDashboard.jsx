@@ -8,10 +8,9 @@ import FinancialNews  from '../noticias/FinancialNews';
 import InsertNews  from '../noticias/InsertNews';
 import Noticias  from '../noticias/Noticias';
 import AnalisisAcciones  from '../noticias/AnalisisAcciones';
+import AccionesMejorRendimiento  from '../noticias/AccionesMejorRendimiento';
+import AccionesPeorRendimiento  from '../noticias/AccionesPeorRendimiento';
 
-
-
-AnalisisAcciones
 
 import Animacion from './Animacion';
 
@@ -44,7 +43,7 @@ const TradingDashboard = () => {
 
           </div>
 
-          <div className="bg-blue-500 p-8 rounded-lg shadow-lg flex items-center justify-center col-span-1 md:col-span-2 h-[250px]  " style={{ backgroundColor: '#fafafa' }}>
+          <div className="bg-blue-500 p-8 rounded-lg shadow-lg flex items-center justify-center col-span-1 md:col-span-2 h-[250px]  " style={{ backgroundColor: '#a8ba86' }}>
           
            <AnalisisAcciones />
           
@@ -57,21 +56,23 @@ const TradingDashboard = () => {
           </div>
 
           <div className="relative p-8 rounded-lg shadow-lg col-span-1" style={{ backgroundColor: '#a8ba86' }}>
-  
-                   {/** Caja 10, donde van las noticias que se insertan en la base de datos y se usa websockets*/}
-                 <InsertNews />
                
-                 
+           <InsertNews />
+                               
           </div>
         </div>
 
         {/* Tercera fila de cajas */}
         <div className="grid grid-cols-1 md:grid-cols-5 gap-4">
           <div className="bg-cyan-500 p-8 rounded-lg shadow-lg flex items-center justify-center col-span-1" style={{ backgroundColor: '#a8ba86' }}>
-            <span className="text-white text-lg font-bold">Caja 11</span>
+            
+            <AccionesMejorRendimiento/>
+
           </div>
           <div className="bg-lime-500 p-8 rounded-lg shadow-lg flex items-center justify-center col-span-1" style={{ backgroundColor: '#a8ba86' }}>
-            <span className="text-white text-lg font-bold">Caja 12</span>
+            
+            <AccionesPeorRendimiento/>
+
           </div>
           <div className="bg-emerald-500 p-8 rounded-lg shadow-lg flex items-center justify-center col-span-1" style={{ backgroundColor: '#a8ba86' }}>
             <span className="text-white text-lg font-bold">Caja 13</span>
