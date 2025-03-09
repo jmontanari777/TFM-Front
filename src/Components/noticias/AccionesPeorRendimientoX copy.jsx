@@ -1,12 +1,12 @@
 import { useState, useEffect } from 'react';
-import { TrendingUp } from 'lucide-react';
+import { TrendingDown } from 'lucide-react';
 
 const AccionesPeorRendimiento = () => {
   const [stocks, setStocks] = useState([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const fetchTopStocks = async () => {
+    const fetchWorstStocks = async () => {
       setLoading(true);
       const mockData = [
         { id: 1, ticker: "INTC", price: 30.85, change: -5.42, percentChange: -14.95 },
@@ -19,17 +19,17 @@ const AccionesPeorRendimiento = () => {
       }, 800);
     };
 
-    fetchTopStocks();
+    fetchWorstStocks();
   }, []);
 
   return (
-    <div className="bg-[#fafafa] rounded-xl shadow-lg p-4 border border-[#e1e3ac]">
+    <div className="bg-[#fafafa] rounded-xl shadow-lg p-4 border border-[#e1e3ac] min-h-[420px]">  {/* Aumenta la altura mínima */}
       <div className="flex items-center justify-between mb-4">
         <div className="flex items-center">
-          <div className="bg-[#638a63] p-1.5 rounded-lg mr-2">
-          <TrendingDown size={18} className="text-[#d60225]" />
+          <div className="bg-[#e1e3ac] p-1.5 rounded-lg mr-2">
+            <TrendingDown size={18} className="text-[#d60225]" />
           </div>
-          <h2 className="text-lg font-bold text-[#223536]">Acciones en alza</h2>
+          <h2 className="text-lg font-bold text-[#223536]">Acciones en baja</h2>
         </div>
       </div>
 
@@ -50,17 +50,17 @@ const AccionesPeorRendimiento = () => {
                     <div className="font-bold text-[#223536]">{stock.ticker}</div>
                     <div className="text-xs text-[#a8ba86]">Precio: ${stock.price}</div>
                   </div>
-                  <div className="text-[#46695a]">+${stock.change}</div>
+                  <div className="text-[#46695a]">{stock.change}</div>
                 </div>
                 <div className="text-xs text-[#638a63]">
-                  +{stock.percentChange}% cambio
+                  {stock.percentChange}% cambio
                 </div>
               </div>
             ))}
           </div>
           <div className="mt-2 text-right">
             <button className="text-[#46695a] hover:text-[#223536] font-medium text-sm hover:underline">
-              Ver todas las acciones → 
+              Ver todas las acciones en baja →
             </button>
           </div>
         </div>
