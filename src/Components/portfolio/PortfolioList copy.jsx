@@ -17,49 +17,36 @@ const customColors = {
   redHover: "#223536",     // Hover del botón "vender"
 };
 
-// Base URL for the backend API
-const API_BASE_URL = 'https://tfm-backend-kalx.onrender.com';
-
 const PortfolioList = () => {
-  const [portfolioData, setPortfolioData] = useState(null);  // Almacena los datos de las carteras del usuario
+  const [portfolioData, setPortfolioData] = useState(null);  //Almacena los datos de las carteras del usuario
   const [selectedPortfolio, setSelectedPortfolio] = useState(null); // Guarda la cartera seleccionada actualmente.
   const [loading, setLoading] = useState(true); // Indica si los datos están cargando.
-  const [error, setError] = useState(null); // Almacena mensajes de error.
+  const [error, setError] = useState(null); //Almacena mensajes de error.
   const [availableStocks, setAvailableStocks] = useState([]); // Lista de acciones disponibles para agregar a una cartera.
-  const [acciones, setAcciones] = useState([]); // Lista de acciones obtenidas del servidor.
-  const [isModalOpen, setIsModalOpen] = useState(false); // Controla la visibilidad del modal para agregar acciones.
-  const [isAddPortfolioModalOpen, setIsAddPortfolioModalOpen] = useState(false); // Controla la visibilidad del modal para agregar una nueva cartera.
-  const [newPortfolioName, setNewPortfolioName] = useState(""); // Almacena el nombre de la nueva cartera.
-  const userId = localStorage.getItem('userId'); // ID del usuario obtenido del localStorage.
+  const [acciones, setAcciones] = useState([]); //Lista de acciones obtenidas del servidor.
+  const [isModalOpen, setIsModalOpen] = useState(false); //Controla la visibilidad del modal para agregar acciones.
+  const [isAddPortfolioModalOpen, setIsAddPortfolioModalOpen] = useState(false); //Controla la visibilidad del modal para agregar una nueva cartera.
+  const [newPortfolioName, setNewPortfolioName] = useState(""); //Almacena el nombre de la nueva cartera.
+  const userId = localStorage.getItem('userId'); //ID del usuario obtenido del localStorage.
   const navigate = useNavigate();
 
-  const formatNumber = (number) => { // Formatea un número para mostrarlo con dos decimales y separadores de miles.
+  const formatNumber = (number) => { //Formatea un número para mostrarlo con dos decimales y separadores de miles.
     if (number === undefined || number === null) return '0.00';
     return number.toLocaleString('es-ES', { minimumFractionDigits: 2 });
   };
 
-  // Axios instance with common configuration
-  const apiClient = axios.create({
-    baseURL: API_BASE_URL,
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    timeout: 10000, // 10 seconds timeout
-  });
 
-  const fetchPortfolioData = async () => { // Obtiene los datos de las carteras y acciones del servidor.
+  const fetchPortfolioData = async () => { //Obtiene los datos de las carteras y acciones del servidor.
     try {
       if (!userId) {
         throw new Error('Usuario no encontrado. Por favor, inicie sesión nuevamente.');
       }
 
-      setLoading(true);
-
       const [portfoliosResponse, stocksResponse] = await Promise.all([
-        apiClient.get(`/portfolios`, {
+        axios.get(`http://localhost:3000/portfolios`, {
           params: { userId: userId }
         }),
-        apiClient.get(`/accions`)
+        axios.get(`http://localhost:3000/accions`)
       ]);
 
       if (portfoliosResponse.data && portfoliosResponse.data.length > 0) {
@@ -93,8 +80,8 @@ const PortfolioList = () => {
         throw new Error('No se encontraron datos de cartera');
       }
     } catch (err) {
+      setError(err.message || 'Error al cargar los datos de la cartera');
       console.error('Error fetching portfolio:', err);
-      setError(err.response?.data?.message || err.message || 'Error al cargar los datos de la cartera');
     } finally {
       setLoading(false);
     }
@@ -104,25 +91,27 @@ const PortfolioList = () => {
     fetchPortfolioData();
   }, []);
 
-  const handleSellStock = async (ticker) => { // Vende una acción de la cartera seleccionada.
+  const handleSellStock = async (ticker) => { //Vende una acción de la cartera seleccionada.
     try {
-      await apiClient.delete(`/portfolios/${userId}/${selectedPortfolio.name}/stock/${ticker}`);
+      await axios.delete(`http://localhost:3000/portfolios/${userId}/${selectedPortfolio.name}/stock/${ticker}`);
       await fetchPortfolioData();
-      console.log('Ticker vendido', ticker);
+      console.log('Ticker vendido',ticker)
     } catch (err) {
       console.error('Error selling stock:', err);
-      alert('Error al vender la acción: ' + (err.response?.data?.message || err.message));
+      alert('Error al vender la acción');
     }
   };
 
-  // Agrega una acción a la cartera seleccionada.
+
+
+  //Agrega una acción a la cartera seleccionada.
   const handleAddStock = async (userId, ticker, quantity, selectedPortfolio) => {
     if (ticker && quantity > 0) {
       try {
-        await apiClient.post(`/users/${userId}/portfolios/${selectedPortfolio}/stock`, {
-          stockId: ticker,
-          title: availableStocks.find(stock => stock.ticker === ticker)?.title || ticker,
-          price: availableStocks.find(stock => stock.ticker === ticker)?.price || 0,
+        await axios.post(`http://localhost:3000/users/${userId}/portfolios/${selectedPortfolio}/stock`, {
+          stockId: selectedStock.ticker,
+          title: selectedStock.title,
+          price: selectedStock.price,
           quantity: quantity,
           portfolioName: selectedPortfolio,
         });
@@ -130,12 +119,12 @@ const PortfolioList = () => {
         setIsModalOpen(false);
       } catch (err) {
         console.error('Error adding stock:', err);
-        alert('Error al añadir la acción: ' + (err.response?.data?.message || err.message));
+        alert('Error al añadir la acción');
       }
     }
   };
 
-  // Agrega una Cartera nueva
+  //Agrega una Cartera nueva
   const handleAddPortfolio = async () => {
     if (!newPortfolioName.trim()) {
       alert('Por favor, ingrese un nombre para la cartera');
@@ -143,7 +132,7 @@ const PortfolioList = () => {
     }
 
     try {
-      await apiClient.post(`/portfolios`, {
+      await axios.post(`http://localhost:3000/portfolios`, {
         userId: userId,
         name: newPortfolioName,
         stocks: []
@@ -154,25 +143,26 @@ const PortfolioList = () => {
       await fetchPortfolioData();
     } catch (err) {
       console.error('Error creating portfolio:', err);
-      alert('Error al crear la cartera: ' + (err.response?.data?.message || err.message));
+      alert('Error al crear la cartera');
     }
   };
 
-  // Borra una Cartera
+
+  //Borra una Cartera
   const handleDeletePortfolio = async (portfolioName) => {
     if (!confirm(`¿Está seguro que desea eliminar la cartera "${portfolioName}"?`)) {
       return;
     }
 
     try {
-      await apiClient.delete(`/portfolios/${userId}/${portfolioName}`);
+      await axios.delete(`http://localhost:3000/portfolios/${userId}/${portfolioName}`);
       await fetchPortfolioData();
       if (selectedPortfolio?.name === portfolioName) {
-        setSelectedPortfolio(portfolioData?.portfolios[0] || null);
+        setSelectedPortfolio(null);
       }
     } catch (err) {
       console.error('Error deleting portfolio:', err);
-      alert('Error al eliminar la cartera: ' + (err.response?.data?.message || err.message));
+      alert('Error al eliminar la cartera');
     }
   };
 
@@ -180,23 +170,6 @@ const PortfolioList = () => {
     <div style={{ minHeight: "100vh", backgroundColor: customColors.secondary, padding: "1.5rem" }}>
       <div style={{ maxWidth: "1200px", margin: "0 auto", backgroundColor: customColors.white, borderRadius: "0.5rem", boxShadow: "0 4px 6px rgba(34, 53, 54, 0.1)", padding: "2rem" }}>
         <p style={{ color: "#223536", fontSize: "1.125rem", fontWeight: 500 }}>Error: {error}</p>
-        <button 
-          onClick={fetchPortfolioData}
-          style={{ 
-            backgroundColor: customColors.primary,
-            color: customColors.white,
-            padding: "0.5rem 1.25rem",
-            marginTop: "1rem",
-            borderRadius: "0.375rem",
-            border: "none",
-            cursor: "pointer",
-            transition: "background-color 0.2s"
-          }}
-          onMouseOver={(e) => e.target.style.backgroundColor = "#46695a"}
-          onMouseOut={(e) => e.target.style.backgroundColor = customColors.primary}
-        >
-          Reintentar
-        </button>
       </div>
     </div>
   );
@@ -233,6 +206,7 @@ const PortfolioList = () => {
             Gestión de Carteras
           </h2>
           <div style={{ display: "flex", gap: "1rem" }}>
+
             <button 
               onClick={() => navigate(-1)}
               style={{ 
@@ -376,11 +350,11 @@ const PortfolioList = () => {
                       <h4 style={{ fontWeight: "bold", fontSize: "1.125rem", color: customColors.text }}>
                         {portfolio.name}
                       </h4>
-                      <p style={{ fontSize: "1.125rem", marginTop: "0.5rem" }}>
-                        Valor Total: <span style={{ fontWeight: "600", color: customColors.primary }}>
-                          ${formatNumber(portfolio.totalValue)}
-                        </span>
-                      </p>
+<p style={{ fontSize: "1.125rem", marginTop: "0.5rem" }}>
+  Valor Total: <span style={{ fontWeight: "600", color: customColors.primary }}>
+    ${formatNumber(portfolio.totalValue)}
+  </span>
+</p>
                       <p style={{ fontSize: "0.875rem", color: customColors.textLight, marginTop: "0.25rem" }}>
                         {portfolio.stocks.length} acciones en cartera
                       </p>
@@ -534,53 +508,45 @@ const PortfolioList = () => {
                   </tr>
                 </thead>
                 <tbody>
-                  {selectedPortfolio?.stocks?.length > 0 ? (
-                    selectedPortfolio.stocks.map((stock, index) => {
-                      const stockValue = stock.price * stock.cantidad;
-                      return (
-                        <tr 
-                          key={stock.ticker}
-                          style={{ 
-                            backgroundColor: index % 2 === 0 ? customColors.white : "rgba(225, 227, 172, 0.2)",
-                            transition: "background-color 0.2s"
-                          }}
-                          onMouseOver={(e) => e.currentTarget.style.backgroundColor = "rgba(168, 186, 134, 0.2)"}
-                          onMouseOut={(e) => e.currentTarget.style.backgroundColor = index % 2 === 0 ? customColors.white : "rgba(225, 227, 172, 0.2)"}
-                        >
-                          <td style={{ padding: "0.75rem 1rem", fontSize: "0.875rem", fontWeight: "500", color: customColors.text, borderBottom: `1px solid ${customColors.border}` }}>{stock.ticker}</td>
-                          <td style={{ padding: "0.75rem 1rem", fontSize: "0.875rem", color: customColors.text, borderBottom: `1px solid ${customColors.border}` }}>{stock.title}</td>
-                          <td style={{ padding: "0.75rem 1rem", fontSize: "0.875rem", color: customColors.text, textAlign: "right", borderBottom: `1px solid ${customColors.border}` }}>${formatNumber(stock.price)}</td>
-                          <td style={{ padding: "0.75rem 1rem", fontSize: "0.875rem", color: customColors.text, textAlign: "right", borderBottom: `1px solid ${customColors.border}` }}>{formatNumber(stock.cantidad)}</td>
-                          <td style={{ padding: "0.75rem 1rem", fontSize: "0.875rem", fontWeight: "500", color: customColors.primary, textAlign: "right", borderBottom: `1px solid ${customColors.border}` }}>${formatNumber(stockValue)}</td>
-                          <td style={{ padding: "0.75rem 1rem", textAlign: "center", borderBottom: `1px solid ${customColors.border}` }}>
-                            <button 
-                              onClick={() => handleSellStock(stock.ticker)}
-                              style={{ 
-                                backgroundColor: customColors.red, 
-                                color: customColors.white, 
-                                padding: "0.25rem 0.75rem", 
-                                borderRadius: "0.375rem", 
-                                border: "none",
-                                cursor: "pointer",
-                                transition: "background-color 0.2s",
-                                fontSize: "0.875rem"
-                              }}
-                              onMouseOver={(e) => e.target.style.backgroundColor = customColors.redHover}
-                              onMouseOut={(e) => e.target.style.backgroundColor = customColors.red}
-                            >
-                              Vender
-                            </button>
-                          </td>
-                        </tr>
-                      );
-                    })
-                  ) : (
-                    <tr>
-                      <td colSpan="6" style={{ padding: "1.5rem", textAlign: "center", color: customColors.textLight }}>
-                        No hay acciones en esta cartera. ¡Añada algunas!
-                      </td>
-                    </tr>
-                  )}
+                  {selectedPortfolio?.stocks?.map((stock, index) => {
+                    const stockValue = stock.price * stock.cantidad;
+                    return (
+                      <tr 
+                        key={stock.ticker}
+                        style={{ 
+                          backgroundColor: index % 2 === 0 ? customColors.white : "rgba(225, 227, 172, 0.2)",
+                          transition: "background-color 0.2s"
+                        }}
+                        onMouseOver={(e) => e.currentTarget.style.backgroundColor = "rgba(168, 186, 134, 0.2)"}
+                        onMouseOut={(e) => e.currentTarget.style.backgroundColor = index % 2 === 0 ? customColors.white : "rgba(225, 227, 172, 0.2)"}
+                      >
+                        <td style={{ padding: "0.75rem 1rem", fontSize: "0.875rem", fontWeight: "500", color: customColors.text, borderBottom: `1px solid ${customColors.border}` }}>{stock.ticker}</td>
+                        <td style={{ padding: "0.75rem 1rem", fontSize: "0.875rem", color: customColors.text, borderBottom: `1px solid ${customColors.border}` }}>{stock.title}</td>
+                        <td style={{ padding: "0.75rem 1rem", fontSize: "0.875rem", color: customColors.text, textAlign: "right", borderBottom: `1px solid ${customColors.border}` }}>${formatNumber(stock.price)}</td>
+                        <td style={{ padding: "0.75rem 1rem", fontSize: "0.875rem", color: customColors.text, textAlign: "right", borderBottom: `1px solid ${customColors.border}` }}>{formatNumber(stock.cantidad)}</td>
+                        <td style={{ padding: "0.75rem 1rem", fontSize: "0.875rem", fontWeight: "500", color: customColors.primary, textAlign: "right", borderBottom: `1px solid ${customColors.border}` }}>${formatNumber(stockValue)}</td>
+                        <td style={{ padding: "0.75rem 1rem", textAlign: "center", borderBottom: `1px solid ${customColors.border}` }}>
+                          <button 
+                            onClick={() => handleSellStock(stock.ticker)}
+                            style={{ 
+                              backgroundColor: customColors.red, 
+                              color: customColors.white, 
+                              padding: "0.25rem 0.75rem", 
+                              borderRadius: "0.375rem", 
+                              border: "none",
+                              cursor: "pointer",
+                              transition: "background-color 0.2s",
+                              fontSize: "0.875rem"
+                            }}
+                            onMouseOver={(e) => e.target.style.backgroundColor = customColors.redHover}
+                            onMouseOut={(e) => e.target.style.backgroundColor = customColors.red}
+                          >
+                            Vender
+                          </button>
+                        </td>
+                      </tr>
+                    );
+                  })}
                 </tbody>
               </table>
             </div>
