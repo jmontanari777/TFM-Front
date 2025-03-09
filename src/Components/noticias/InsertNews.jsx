@@ -3,14 +3,14 @@ import axios from "axios";
 
 export default function InsertNews() {
   const [status, setStatus] = useState("");
-  const useriD = localStorage.getItem('useriD'); // Obtén el userId desde el localStorage
+  const userId = localStorage.getItem('userId'); // Obtén el userId desde el localStorage
 
   const insertNews = async (newsData) => {
     try {
       // Agrega el userId al objeto newsData
       const dataToSend = {
         ...newsData,
-        userId: useriD, // Envía el userId en el cuerpo de la solicitud
+        userId: userId, // Envía el userId en el cuerpo de la solicitud
       };
 
       console.log("Enviando datos:", dataToSend);
