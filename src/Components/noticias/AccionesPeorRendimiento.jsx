@@ -50,7 +50,7 @@ const AccionesPeorRendimiento = () => {
                     <div className="font-bold text-[#223536]">{stock.ticker}</div>
                     <div className="text-xs text-[#a8ba86]">Precio: ${stock.price}</div>
                   </div>
-                  <div className="text-[#46695a]">-${stock.change}</div>
+                  <div className="text-[#46695a]">${stock.change}</div>
                 </div>
                 <div className="text-xs text-[#638a63]">
                   +{stock.percentChange}% cambio
