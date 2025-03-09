@@ -20,13 +20,13 @@ const TradingDashboard = () => {
       <main className="container mx-auto px-4 py-8">
         {/* Primera fila de cajas */}
         <div className="grid grid-cols-1 md:grid-cols-5 gap-4 mb-4">
-        <div className="p-4 rounded-lg shadow-lg flex flex-col md:col-span-1 col-span-1 w-full h-[500px] overflow-hidden" style={{ backgroundColor: '#a8ba86' }}>
+        <div className="p-4 rounded-lg shadow-lg flex flex-col md:col-span-1 col-span-1 w-full h-[520px] overflow-hidden" style={{ backgroundColor: '#a8ba86' }}>
             <Indices />
           </div>
-          <div className="bg-blue-500 p-8 rounded-lg shadow-lg flex items-center justify-center col-span-1 md:col-span-2 h-[480px]  " style={{ backgroundColor: '#fafafa' }}>
+          <div className="bg-blue-500 p-8 rounded-lg shadow-lg flex items-center justify-center col-span-1 md:col-span-2 h-[520px]  " style={{ backgroundColor: '#fafafa' }}>
             <StockIndicesDashboard />
           </div>
-          <div className="bg-blue-500 p-8 rounded-lg shadow-lg flex items-center justify-center col-span-1 md:col-span-2 h-[500px]  " style={{ backgroundColor: '#a8ba86' }}>
+          <div className="bg-blue-500 p-8 rounded-lg shadow-lg flex items-center justify-center col-span-1 md:col-span-2 h-[520px]  " style={{ backgroundColor: '#a8ba86' }}>
             <Noticias />
           </div>
         </div>
