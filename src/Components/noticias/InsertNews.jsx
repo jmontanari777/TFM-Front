@@ -6,11 +6,30 @@ export default function InsertNews() {
 
   const insertNews = async (newsData) => {
     try {
-      const response = await axios.post("http://localhost:3000/noticias", newsData);
+      console.log("Enviando datos:", newsData);
+      const response = await axios.post(
+        "https://tfm-backend-kalx.onrender.com/noticias", 
+        newsData,
+        {
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          timeout: 15000, // 15 segundos para dar tiempo a Render
+        }
+      );
       setStatus(`✅ Noticia insertada: ${response.data.titulo}`);
     } catch (error) {
-      setStatus("❌ Error al insertar la noticia");
-      console.error(error);
+      setStatus(`❌ Error: ${error.message || 'Desconocido'}`);
+      
+      if (error.response) {
+        // El servidor respondió con un código de estado fuera del rango 2xx
+        console.error("Datos de error:", error.response.data);
+        console.error("Estado:", error.response.status);
+      } else if (error.request) {
+        // La solicitud fue hecha pero no se recibió respuesta
+        console.error("No se recibió respuesta del servidor");
+      }
+      console.error("Error completo:", error);
     }
   };
 
