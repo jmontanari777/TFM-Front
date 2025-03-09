@@ -64,12 +64,12 @@ const TradingDashboard = () => {
 
         {/* Tercera fila de cajas */}
         <div className="grid grid-cols-1 md:grid-cols-5 gap-4">
-          <div className="bg-cyan-500 p-8 rounded-lg shadow-lg flex items-center justify-center col-span-1 h-[400px]" style={{ backgroundColor: '#a8ba86' }}>
+          <div className="bg-cyan-500 p-8 rounded-lg shadow-lg flex items-center justify-center col-span-1 h-[380px]" style={{ backgroundColor: '#a8ba86' }}>
             
             <AccionesMejorRendimiento/>
 
           </div>
-          <div className="bg-lime-500 p-8 rounded-lg shadow-lg flex items-center justify-center col-span-1 h-[400px]" style={{ backgroundColor: '#a8ba86' }}>
+          <div className="bg-lime-500 p-8 rounded-lg shadow-lg flex items-center justify-center col-span-1 h-[380px]" style={{ backgroundColor: '#a8ba86' }}>
             
             <AccionesPeorRendimiento/>
 
