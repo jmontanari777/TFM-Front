@@ -61,7 +61,7 @@ const AuthProvider = ({ children }) => {
   const login = (userData) => {
     setUser(userData) // Guarda la información del usuario en el estado
     setIsLoggedIn(true) // Cambia el estado de autenticación a verdadero
-    window.location.href = '/loggg'; //recarga la pagina
+    window.location.href = '/'; //recarga la pagina, luego del login
   }
 
   // ================================
