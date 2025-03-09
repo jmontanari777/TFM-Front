@@ -9,9 +9,9 @@ const AccionesPeorRendimiento = () => {
     const fetchTopStocks = async () => {
       setLoading(true);
       const mockData = [
-        { id: 1, ticker: "INTC", price: 30.85, change: -5.42, percentChange: -14.95 },
-        { id: 2, ticker: "GME", price: 14.25, change: -2.35, percentChange: -14.16 },
-        { id: 3, ticker: "PLTR", price: 19.87, change: -2.62, percentChange: -11.65 },
+        { id: 1, ticker: "INTC", price: 30.85, change: 5.42, percentChange: 14.95 },
+        { id: 2, ticker: "GME", price: 14.25, change: 2.35, percentChange: 14.16 },
+        { id: 3, ticker: "PLTR", price: 19.87, change: 2.62, percentChange: 11.65 },
       ];
       setTimeout(() => {
         setStocks(mockData);
@@ -29,7 +29,7 @@ const AccionesPeorRendimiento = () => {
           <div className="bg-[#638a63] p-1.5 rounded-lg mr-2">
           <TrendingDown size={18} className="text-[#d60225]" />
           </div>
-          <h2 className="text-lg font-bold text-[#223536]">Acciones en alza</h2>
+          <h2 className="text-lg font-bold text-[#223536]">Acciones en baja</h2>
         </div>
       </div>
 
@@ -50,7 +50,7 @@ const AccionesPeorRendimiento = () => {
                     <div className="font-bold text-[#223536]">{stock.ticker}</div>
                     <div className="text-xs text-[#a8ba86]">Precio: ${stock.price}</div>
                   </div>
-                  <div className="text-[#46695a]">+${stock.change}</div>
+                  <div className="text-[#46695a]">-${stock.change}</div>
                 </div>
                 <div className="text-xs text-[#638a63]">
                   +{stock.percentChange}% cambio
